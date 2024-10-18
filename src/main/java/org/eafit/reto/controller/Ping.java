@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalTime;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor(onConstructor = @__(@Inject))
@@ -29,7 +30,7 @@ public class Ping {
     private final CapacitacionService capacitacionService;
 
     @GetMapping("/ping")
-    public String ping() {
+    public Map ping() {
 
         // Repositorios
 
@@ -108,11 +109,13 @@ public class Ping {
 
         // Metodos para listar
 
-        for ( Departamento depto : departamentoService.findAll()) {
-            System.out.println("Para el departamento " + depto.getNombre() + " trabajan las personas:");
-            depto.getPersonas()
-                    .forEach(System.out::println);
-        }
-        return "ping";
+        String mensaje;
+
+        return Map.of("Message", departamentoService.findAll()
+                        .stream()
+                                .map(depto -> {
+                                    return "Para el departamento " + depto.getNombre() + " trabajan las personas:" + depto.getPersonas();
+                                }).toList());
+
     }
 }
