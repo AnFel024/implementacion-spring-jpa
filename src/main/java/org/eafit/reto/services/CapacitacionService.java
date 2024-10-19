@@ -14,7 +14,7 @@ import java.util.Optional;
 @RequiredArgsConstructor(onConstructor = @__(@Inject))
 public class CapacitacionService {
 
-    private CapacitacionRepository capacitacionRepository;
+    private final CapacitacionRepository capacitacionRepository;
 
     public Capacitacion create(Capacitacion Capacitacion) {
         Capacitacion capacitacion1 = capacitacionRepository.save(Capacitacion);

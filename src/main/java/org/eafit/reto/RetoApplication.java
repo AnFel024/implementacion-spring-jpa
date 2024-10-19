@@ -19,7 +19,5 @@ public class RetoApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(RetoApplication.class, args);
-
-
 	}
 }

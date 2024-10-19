@@ -10,26 +10,32 @@ import org.eafit.reto.services.CapacitacionService;
 import org.eafit.reto.services.CuentaService;
 import org.eafit.reto.services.DepartamentoService;
 import org.eafit.reto.services.PersonaService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalTime;
 import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor(onConstructor = @__(@Inject))
-public class Ping {
+public class PingController {
 
     private final PersonaService personaService;
-
     private final DepartamentoService departamentoService;
-
     private final CuentaService cuentaService;
-
     private final CapacitacionService capacitacionService;
 
-    @GetMapping("/ping")
+    @GetMapping("/list-persons")
+    public Map listarPersonas() {
+        return Map.of("personas", personaService.findAll());
+    }
+
+    @PostMapping("/get-person-by-name")
+    public Map listarPersonas(@RequestBody() Map<String, String > name) {
+        System.out.println(name);
+        return Map.of("personas", personaService.findByNombre(name.get("name")));
+    }
+
+    @GetMapping("/list-deptos")
     public Map ping() {
 
         // Repositorios
@@ -104,8 +110,9 @@ public class Ping {
         // Almacena
         cuentaService.create(cuenta);
         cuentaService.create(cuenta2);
-		/*capacitacionService.create(capacitacion);
-		capacitacionService.create(capacitacion2);*/
+
+		capacitacionService.create(capacitacion);
+		capacitacionService.create(capacitacion2);
 
         // Metodos para listar
 

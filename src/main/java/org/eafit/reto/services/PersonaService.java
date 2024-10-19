@@ -26,6 +26,10 @@ public class PersonaService {
         return personaRepository.findAll();
     }
 
+    public List<Persona> findByNombre(String nombre) {
+        return personaRepository.findByNombre(nombre).orElse(List.of());
+    }
+
     public Persona findById(Long id) {
         Optional<Persona> optionalPersona = personaRepository.findById(id);
         if (optionalPersona.isEmpty()) {
