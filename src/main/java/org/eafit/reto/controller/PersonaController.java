@@ -30,7 +30,7 @@ public class PersonaController {
 
     @GetMapping("/get/{id}")
     public Persona obtenerPersona(@PathVariable Long id) {
-        return personaService.findById(id);
+        return personaService.findByCedula(id);
     }
 
     @DeleteMapping("/delete/{id}")

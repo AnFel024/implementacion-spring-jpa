@@ -4,7 +4,6 @@ import jakarta.inject.Inject;
 import lombok.RequiredArgsConstructor;
 import org.eafit.reto.models.Persona;
 import org.eafit.reto.repositories.PersonaRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,6 +14,7 @@ import java.util.Optional;
 public class PersonaService {
 
     private final PersonaRepository personaRepository;
+    //private final MongoPersonaRepository personaRepository;
 
     public Persona create(Persona persona) {
         Persona persona1 = personaRepository.save(persona);
@@ -36,10 +36,12 @@ public class PersonaService {
         return persona1;
     }
 
-    public Persona findById(Long id) {
-        Optional<Persona> optionalPersona = personaRepository.findById(id);
+    public Persona findByCedula(Long cedula) {
+        Optional<Persona> optionalPersona =
+                personaRepository.findById(cedula);
         if (optionalPersona.isEmpty()) {
-            System.out.println("La persona con id " + id + " no existe");
+            System.out.println("La persona con cedula "
+                    + cedula + " no existe");
             return null;
         }
         return optionalPersona.get();

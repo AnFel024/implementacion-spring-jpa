@@ -1,13 +1,14 @@
 package org.eafit.reto.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.eafit.reto.contracts.PersonaToDepartamentoContract;
 import org.eafit.reto.models.Departamento;
-import org.eafit.reto.models.Persona;
 import org.eafit.reto.services.DepartamentoService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/departamento")
@@ -27,7 +28,7 @@ public class DepartamentoController {
 
     @PostMapping("/update")
     public Departamento actualizarDepartamento(@RequestBody Departamento departamento) {
-        return departamentoService.up(departamento);
+        return departamentoService.update(departamento);
     }
 
     @GetMapping("/get/{id}")
@@ -38,5 +39,17 @@ public class DepartamentoController {
     @GetMapping("/get/{departamentoId}/persona/{personaId}")
     public Departamento obtenerDepartamento(@PathVariable Integer departamentoId, @PathVariable Long personaId) {
         return departamentoService.findByCedulaAndDepartamentoId(personaId, departamentoId);
+    }
+
+    @PostMapping("/add/persona")
+    public ResponseEntity<?> agregarPersona(
+            @RequestBody PersonaToDepartamentoContract
+                    personaToDepartamentoContract) {
+        departamentoService.addPersona(
+                personaToDepartamentoContract.getPersonaCedula(),
+                personaToDepartamentoContract.getDepartamentoId());
+        return ResponseEntity.ok().body(
+                Map.of("message",
+                        "Persona agregada al departamento"));
     }
 }
