@@ -30,6 +30,12 @@ public class PersonaService {
         return personaRepository.findByNombre(nombre).orElse(List.of());
     }
 
+    public Persona up(Persona persona) {
+        Persona persona1 = personaRepository.save(persona);
+        System.out.println("Entidad actualizada");
+        return persona1;
+    }
+
     public Persona findById(Long id) {
         Optional<Persona> optionalPersona = personaRepository.findById(id);
         if (optionalPersona.isEmpty()) {
@@ -37,5 +43,9 @@ public class PersonaService {
             return null;
         }
         return optionalPersona.get();
+    }
+
+    public void delete(Long id) {
+        personaRepository.deleteById(id);
     }
 }

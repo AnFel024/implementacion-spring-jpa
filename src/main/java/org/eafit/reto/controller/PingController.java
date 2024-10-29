@@ -34,13 +34,17 @@ public class PingController {
         System.out.println(name);
         return Map.of("personas", personaService.findByNombre(name.get("name")));
     }
+    
+    @GetMapping("/get-person-by")
+    public Map<Object, Object> listarPersonasGet(@RequestParam("name") String name) {
+        System.out.println(name);
+        return Map.of("personas", personaService.findByNombre(name));
+    }
 
-    @GetMapping("/list-deptos")
+    @GetMapping("/create-entities")
     public Map ping() {
 
         // Repositorios
-
-
         // Dominios (registros)
         Persona persona = new Persona();
         persona.setNombre("Juana Leon");
