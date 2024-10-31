@@ -1,8 +1,8 @@
 package org.eafit.reto.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.eafit.reto.contracts.PersonaToDepartamentoContract;
-import org.eafit.reto.models.Departamento;
+import org.eafit.reto.contracts.request.PersonaToDepartamentoRequest;
+import org.eafit.reto.entities.Departamento;
 import org.eafit.reto.services.DepartamentoService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -43,11 +43,11 @@ public class DepartamentoController {
 
     @PostMapping("/add/persona")
     public ResponseEntity<?> agregarPersona(
-            @RequestBody PersonaToDepartamentoContract
-                    personaToDepartamentoContract) {
+            @RequestBody PersonaToDepartamentoRequest
+                    personaToDepartamentoRequest) {
         departamentoService.addPersona(
-                personaToDepartamentoContract.getPersonaCedula(),
-                personaToDepartamentoContract.getDepartamentoId());
+                personaToDepartamentoRequest.getPersonaCedula(),
+                personaToDepartamentoRequest.getDepartamentoId());
         return ResponseEntity.ok().body(
                 Map.of("message",
                         "Persona agregada al departamento"));

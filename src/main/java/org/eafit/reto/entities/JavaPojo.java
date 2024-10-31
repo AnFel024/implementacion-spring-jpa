@@ -1,10 +1,9 @@
-package org.eafit.reto.models;
+package org.eafit.reto.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Builder;
 import lombok.Data;
 
-import java.math.BigInteger;
 import java.util.ArrayList;
 
 @Data

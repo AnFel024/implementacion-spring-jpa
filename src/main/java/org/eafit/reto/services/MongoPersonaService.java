@@ -1,36 +1,34 @@
 package org.eafit.reto.services;
 
-import jakarta.inject.Inject;
-import lombok.RequiredArgsConstructor;
-import org.eafit.reto.entities.PersonaPostgres;
+import org.eafit.reto.entities.mongo.MongoPersona;
 import org.eafit.reto.mappers.interfaces.PersonaMapper;
 import org.eafit.reto.models.Persona;
-import org.eafit.reto.repositories.PersonaRepository;
+import org.eafit.reto.repositories.mongo.MongoPersonaRepository;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class PersonaService {
+public class MongoPersonaService {
 
-    private final PersonaRepository personaRepository;
+    //private final PersonaRepository personaRepository;
+    private final MongoPersonaRepository personaRepository;
     private final PersonaMapper mapper;
 
-    public PersonaService(PersonaRepository personaRepository, PersonaMapper mapper) {
+    public MongoPersonaService(MongoPersonaRepository personaRepository, PersonaMapper mapper) {
         this.personaRepository = personaRepository;
         this.mapper = mapper;
     }
     //private final MongoPersonaRepository personaRepository;
 
     public Persona create(Persona persona) {
-        PersonaPostgres personaPostgres =
-                mapper.mapPersonaModelToPersonaPostgres(persona);
-        personaPostgres.setCreated_at(LocalDateTime.now());
-        personaPostgres.setUpdated_at(LocalDateTime.now());
+        MongoPersona personaPostgres =
+                mapper.mapPersonaToMongoPersona(persona);
+        //personaPostgres.setCreated_at(LocalDateTime.now());
+        //personaPostgres.setUpdated_at(LocalDateTime.now());
         Persona persona1 =
-                mapper.mapPersonaPostgresToPersonaModel(
+                mapper.mapMongoPersonaToPersona(
                         personaRepository.save(personaPostgres)
                 );
         System.out.println("Entidad creada");
@@ -38,7 +36,7 @@ public class PersonaService {
     }
 
     public List<Persona> findAll() {
-        return mapper.mapPersonaPostgresListToPersonaModelList(personaRepository.findAll());
+        return mapper.mapPersonaMongoListToPersonaModelList(personaRepository.findAll());
     }
 
     public List<Persona> findByNombre(String nombre) {
@@ -46,23 +44,23 @@ public class PersonaService {
     }
 
     public Persona up(Persona persona) {
-        PersonaPostgres personaPostgres = mapper.mapPersonaModelToPersonaPostgres(persona);
-        personaPostgres.setUpdated_at(LocalDateTime.now());
-        Persona persona1 = mapper.mapPersonaPostgresToPersonaModel(
+        MongoPersona personaPostgres = mapper.mapPersonaToMongoPersona(persona);
+        //personaPostgres.setUpdated_at(LocalDateTime.now());
+        Persona persona1 = mapper.mapMongoPersonaToPersona(
                 personaRepository.save(personaPostgres));
         System.out.println("Entidad actualizada");
         return persona1;
     }
 
     public Persona findByCedula(Long cedula) {
-        Optional<PersonaPostgres> optionalPersona =
+        Optional<MongoPersona> optionalPersona =
                 personaRepository.findById(cedula);
         if (optionalPersona.isEmpty()) {
             System.out.println("La persona con cedula "
                     + cedula + " no existe");
             return null;
         }
-        return mapper.mapPersonaPostgresToPersonaModel(optionalPersona.get());
+        return mapper.mapMongoPersonaToPersona(optionalPersona.get());
     }
 
     public void delete(Long id) {

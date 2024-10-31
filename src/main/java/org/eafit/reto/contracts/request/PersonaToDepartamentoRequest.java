@@ -1,4 +1,4 @@
-package org.eafit.reto.contracts;
+package org.eafit.reto.contracts.request;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -7,7 +7,7 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class PersonaToDepartamentoContract {
+public class PersonaToDepartamentoRequest {
     Long personaCedula;
     Integer departamentoId;
 }

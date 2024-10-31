@@ -2,9 +2,10 @@ package org.eafit.reto.controller;
 
 import jakarta.inject.Inject;
 import lombok.RequiredArgsConstructor;
-import org.eafit.reto.models.Capacitacion;
-import org.eafit.reto.models.Cuenta;
-import org.eafit.reto.models.Departamento;
+import org.eafit.reto.entities.Capacitacion;
+import org.eafit.reto.entities.Cuenta;
+import org.eafit.reto.entities.Departamento;
+import org.eafit.reto.mappers.interfaces.PersonaMapper;
 import org.eafit.reto.models.Persona;
 import org.eafit.reto.services.CapacitacionService;
 import org.eafit.reto.services.CuentaService;
@@ -23,6 +24,7 @@ public class PingController {
     private final DepartamentoService departamentoService;
     private final CuentaService cuentaService;
     private final CapacitacionService capacitacionService;
+    private final PersonaMapper personaMapper;
 
     @GetMapping("/list-persons")
     public Map listarPersonas() {
@@ -34,7 +36,7 @@ public class PingController {
         System.out.println(name);
         return Map.of("personas", personaService.findByNombre(name.get("name")));
     }
-    
+
     @GetMapping("/get-person-by")
     public Map<Object, Object> listarPersonasGet(@RequestParam("name") String name) {
         System.out.println(name);
@@ -49,15 +51,15 @@ public class PingController {
         Persona persona = new Persona();
         persona.setNombre("Juana Leon");
         persona.setCedula(1234987L);
-        Persona persona2 = Persona.builder()
+        Persona persona1 = Persona.builder()
                 .nombre("Andres Morales")
                 .cedula(123L)
                 .build();
-        Persona persona3 = Persona.builder()
+        Persona persona2 = Persona.builder()
                 .nombre("Ares Morals")
                 .cedula(124L)
                 .build();
-        Persona persona4 = Persona.builder()
+        Persona persona3 = Persona.builder()
                 .nombre("ndres Moraes")
                 .cedula(125L)
                 .build();
@@ -96,19 +98,20 @@ public class PingController {
 
         // Almacena las personas en la base de datos
         personaService.create(persona);
+        personaService.create(persona1);
         personaService.create(persona2);
         personaService.create(persona3);
-        personaService.create(persona4);
 
         // Almacena el departamento en la base
-        departamento.getPersonas().add(persona);
-        departamento.getPersonas().add(persona2);
+        departamento.getPersonas().add(
+                personaMapper.mapPersonaModelToPersonaPostgres(persona));
+        departamento.getPersonas().add(personaMapper.mapPersonaModelToPersonaPostgres(persona1));
         departamentoService.create(departamento);
 
-        departamento2.getPersonas().add(persona3);
+        departamento2.getPersonas().add(personaMapper.mapPersonaModelToPersonaPostgres(persona2));
         departamentoService.create(departamento2);
 
-        departamento3.getPersonas().add(persona4);
+        departamento3.getPersonas().add(personaMapper.mapPersonaModelToPersonaPostgres(persona3));
         departamentoService.create(departamento3);
 
         // Almacena

@@ -1,4 +1,4 @@
-package org.eafit.reto.models;
+package org.eafit.reto.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -24,5 +24,5 @@ public class Departamento {
     @JoinTable(name = "departamento_persona",
             joinColumns = @JoinColumn(name = "id"),
             inverseJoinColumns = @JoinColumn(name = "cedula"))
-    private Set<Persona> personas = new HashSet<>();
+    private Set<PersonaPostgres> personas = new HashSet<>();
 }

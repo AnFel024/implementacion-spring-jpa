@@ -1,7 +1,7 @@
 package org.eafit.reto.repositories.mongo;
 
-import org.eafit.reto.models.Persona;
-import org.eafit.reto.models.mongo.MongoPersona;
+import org.eafit.reto.entities.PersonaPostgres;
+import org.eafit.reto.entities.mongo.MongoPersona;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
@@ -11,7 +11,7 @@ import java.util.Optional;
 @Repository
 public interface MongoPersonaRepository extends MongoRepository<MongoPersona, Long> {
 
-    Optional<List<Persona>> findByNombre(String nombre);
+    Optional<List<PersonaPostgres>> findByNombre(String nombre);
 
     /*
     Optional<List<Persona>> findByNombreIgnoreCaseAndAndCedula(String nombre, Long cedula);

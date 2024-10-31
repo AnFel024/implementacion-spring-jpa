@@ -2,9 +2,8 @@ package org.eafit.reto.services;
 
 import jakarta.inject.Inject;
 import lombok.RequiredArgsConstructor;
-import org.eafit.reto.models.Cuenta;
+import org.eafit.reto.entities.Cuenta;
 import org.eafit.reto.repositories.CuentaRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

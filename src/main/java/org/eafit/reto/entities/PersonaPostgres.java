@@ -1,12 +1,13 @@
-package org.eafit.reto.models.mongo;
+package org.eafit.reto.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 // POJO -> Hibernate (ORM) -> SQL
 
@@ -14,12 +15,14 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(collection = "persona")
-public class MongoPersona {
-    //@Id
-    //private UUID id;
+@Entity
+public class PersonaPostgres {
+    // @Id
+    // private UUID id;
     private String nombre;
     @Id
     @Column(nullable = false)
     private Long cedula;
+    private LocalDateTime created_at;
+    private LocalDateTime updated_at;
 }

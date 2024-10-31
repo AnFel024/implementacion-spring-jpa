@@ -1,18 +1,16 @@
 package org.eafit.reto.repositories;
 
-import org.eafit.reto.models.Departamento;
-import org.eafit.reto.models.Persona;
+import org.eafit.reto.entities.PersonaPostgres;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface PersonaRepository extends JpaRepository<Persona, Long> {
+public interface PersonaRepository extends JpaRepository<PersonaPostgres, Long> {
 
-    Optional<List<Persona>> findByNombre(String nombre);
+    Optional<List<PersonaPostgres>> findByNombre(String nombre);
 
     /*
     Optional<List<Persona>> findByNombreIgnoreCaseAndAndCedula(String nombre, Long cedula);

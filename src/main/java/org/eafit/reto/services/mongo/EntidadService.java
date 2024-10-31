@@ -1,6 +1,6 @@
 package org.eafit.reto.services.mongo;
 
-import org.eafit.reto.models.mongo.Entidad;
+import org.eafit.reto.entities.mongo.Entidad;
 import org.eafit.reto.repositories.mongo.EntidadRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

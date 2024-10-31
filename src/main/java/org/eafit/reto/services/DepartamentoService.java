@@ -2,10 +2,10 @@ package org.eafit.reto.services;
 
 import jakarta.inject.Inject;
 import lombok.RequiredArgsConstructor;
-import org.eafit.reto.models.Departamento;
+import org.eafit.reto.entities.Departamento;
+import org.eafit.reto.mappers.interfaces.PersonaMapper;
 import org.eafit.reto.models.Persona;
 import org.eafit.reto.repositories.DepartamentoRepository;
-import org.eafit.reto.repositories.PersonaRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,6 +17,7 @@ public class DepartamentoService {
 
     private final DepartamentoRepository departamentoRepository;
     private final PersonaService personaService;
+    private final PersonaMapper personaMapper;
 
     public Departamento create(Departamento Departamento) {
         Departamento Departamento1 = departamentoRepository.save(Departamento);
@@ -79,7 +80,8 @@ public class DepartamentoService {
             throw new RuntimeException("La persona con cedula "
                     + personaCedula + " no existe");
         }
-        departamento.getPersonas().add(personaByCedula);
+        departamento.getPersonas().add(
+                personaMapper.mapPersonaModelToPersonaPostgres(personaByCedula));
         update(departamento);
         //departamentoRepository.updateDepartamentoByPersonas_CedulaAndId(personaCedula, departamentoId);
     }

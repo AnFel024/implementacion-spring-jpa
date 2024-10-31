@@ -1,12 +1,11 @@
 package org.eafit.reto.controller;
 
-import org.eafit.reto.models.JavaPojo;
+import org.eafit.reto.entities.JavaPojo;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
-import java.util.Objects;
 
 import static ch.qos.logback.core.util.StringUtil.isNullOrEmpty;
 

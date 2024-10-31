@@ -1,4 +1,4 @@
-package org.eafit.reto.models.mongo;
+package org.eafit.reto.entities.mongo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
