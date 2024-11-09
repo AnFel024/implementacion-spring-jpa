@@ -6,6 +6,7 @@ import org.eafit.reto.entities.PersonaPostgres;
 import org.eafit.reto.mappers.interfaces.PersonaMapper;
 import org.eafit.reto.models.Persona;
 import org.eafit.reto.repositories.PersonaRepository;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;

@@ -9,5 +9,4 @@ import java.util.Optional;
 @Repository
 public interface DepartamentoRepository extends JpaRepository<Departamento, Integer> {
     Optional<Departamento> findByPersonas_CedulaAndId(Long personaId, Integer departamentoId);
-    // Departamento updateDepartamentoByPersonas_CedulaAndId(Long personaId, Integer departamentoId);
 }

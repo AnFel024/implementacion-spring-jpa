@@ -37,6 +37,10 @@ dependencies {
 	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-jdbc
 	implementation 'org.springframework.boot:spring-boot-starter-jdbc:3.0.7'
 
+	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web
+	implementation 'org.springframework.boot:spring-boot-starter-web:3.3.4'
+
+
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
 
 	implementation 'com.fasterxml.jackson.core:jackson-databind:2.14.0'
